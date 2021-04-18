@@ -119,7 +119,10 @@ class Engine:
         loss.backward()
         self.optimizer.step()
         preds = self.sigmoid(outputs.detach()) > 0.5
-        return loss.item(), list(preds.numpy()), list(y.detach().numpy())
+        if self.device == 'cuda':
+            return loss.item(), list(preds.cpu().numpy()), list(y.cpu().detach().numpy())
+        else:
+            return loss.item(), list(preds.numpy()), list(y.detach().numpy())
 
     def train_one_epoch(self, epoch_num):
 
@@ -146,9 +149,15 @@ class Engine:
         for x, y in self.utils.test_loader:
             outputs = self.model(x)
             preds = self.sigmoid(outputs.detach()) > 0.5
-            preds = list(preds.numpy())
+            if self.device == 'cpu':
+                preds = list(preds.cpu().numpy())
+            else:
+                preds = list(preds.numpy())
             l = self.criterion(outputs, y).item()
-            labels = list(y.detach().numpy())
+            if self.device == 'cuda':
+                labels = list(y.cpu().detach().numpy())
+            else:
+                labels = list(y.detach().numpy())
             epoch_loss += l
             all_preds += preds
             all_labels += labels
