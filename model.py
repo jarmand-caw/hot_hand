@@ -2,15 +2,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-from utils import Utils
-from utils import conf
 from sklearn.metrics import accuracy_score
 from copy import deepcopy
 
-
-utils = Utils(conf)
-utils.prep_dataset()
-utils.create_torch_loaders()
 
 class ShotModel(nn.Module):
     def __init__(self, config):
@@ -184,6 +178,3 @@ class Engine:
         print('Best testing loss = {}'.format(best_loss))
 
 
-model = ShotModel(conf)
-engine = Engine(model, conf)
-engine.train_to_completion()
