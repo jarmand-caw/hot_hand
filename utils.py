@@ -152,3 +152,9 @@ class Utils:
 
         self.train_loader = train_loader
         self.test_loader = test_loader
+
+        all_x = self.shots_df[self.cat_cols + self.cont_cols].values
+        all_y = self.shots_df[self.y_col].values
+        all_dataset = TensorDataset(torch.Tensor(all_x), torch.Tensor(all_y))
+        all_loader = DataLoader(all_dataset, batch_size = len(all_x), shuffle=False)
+        self.all_loader = all_loader
