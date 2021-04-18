@@ -7,7 +7,7 @@ from copy import deepcopy
 
 
 class ShotModel(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, utils):
         super(ShotModel, self).__init__()
 
         self.embedding_dims = config['embedding_dims']
