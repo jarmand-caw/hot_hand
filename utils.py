@@ -5,7 +5,7 @@ import pandas as pd
 from torch.utils.data import TensorDataset, DataLoader
 
 possible_cont_cols = ['FINAL_MARGIN', 'GAME_CLOCK', 'SHOT_CLOCK', 'DRIBBLES', 'TOUCH_TIME',
-                     'SHOT_DIST', 'CLOSE_DEF_DIST']
+                     'SHOT_DIST', 'CLOSE_DEF_DIST', 'TIME_CHUCK', 'CRUNCH_TIME', 'TOTAL_ELAPSED_TIME']
 possible_cat_cols = ['W', 'PERIOD', 'PTS_TYPE', 'CLOSEST_DEFENDER_PLAYER_ID', 'player_id']
 
 conf = {
@@ -110,7 +110,8 @@ class Utils:
         shots_df = shots_df[self.cat_cols+self.cont_cols+self.y_col]
         shots_df.dropna(axis='rows', how='any', inplace=True)
         for col in self.cont_cols:
-            shots_df[col] = (shots_df[col]-shots_df[col].mean())/shots_df[col].std()
+            if col not in ['TIME_CHUCK', 'CRUNCH_TIME']:
+                shots_df[col] = (shots_df[col]-shots_df[col].mean())/shots_df[col].std()
 
         self.shots_df = shots_df
 
