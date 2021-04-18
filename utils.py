@@ -9,7 +9,7 @@ possible_cont_cols = ['FINAL_MARGIN', 'GAME_CLOCK', 'SHOT_CLOCK', 'DRIBBLES', 'T
 possible_cat_cols = ['W', 'PERIOD', 'PTS_TYPE', 'CLOSEST_DEFENDER_PLAYER_ID', 'player_id']
 
 conf = {
-    'file_path': '/Users/jackarmand/Documents/hot-hand/shot_logs.csv',
+    'file_path': '/Users/jackarmand/Documents/hot_hand/shot_logs.csv',
     'cont_cols': possible_cont_cols,
     'cat_cols': possible_cat_cols,
     'embedding_dims': {'W': 5, 'PERIOD':25, 'PTS_TYPE': 25, 'CLOSEST_DEFENDER_PLAYER_ID':50, 'player_id': 300},
