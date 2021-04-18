@@ -87,6 +87,7 @@ class ShotModel(nn.Module):
 
 class Engine:
     def __init__(self, model, config, utils):
+        self.utils = utils
         self.device = config['device']
         if self.device == 'cuda':
             self.model = model.cuda()
@@ -125,7 +126,7 @@ class Engine:
         epoch_loss = 0
         all_preds = []
         all_labels = []
-        for x,y in utils.train_loader:
+        for x,y in self.utils.train_loader:
             if self.device == 'cuda':
                 x = x.cuda()
                 y = y.cuda()
@@ -142,7 +143,7 @@ class Engine:
         epoch_loss = 0
         all_preds = []
         all_labels = []
-        for x, y in utils.test_loader:
+        for x, y in self.utils.test_loader:
             outputs = self.model(x)
             preds = self.sigmoid(outputs.detach()) > 0.5
             preds = list(preds.numpy())
