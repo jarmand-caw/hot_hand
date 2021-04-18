@@ -152,7 +152,7 @@ class Engine:
                 y = y.cuda()
             outputs = self.model(x)
             preds = self.sigmoid(outputs.detach()) > 0.5
-            if self.device == 'cpu':
+            if self.device == 'cuda':
                 preds = list(preds.cpu().numpy())
             else:
                 preds = list(preds.numpy())
