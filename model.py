@@ -86,7 +86,7 @@ class ShotModel(nn.Module):
         return affine
 
 class Engine:
-    def __init__(self, model, config):
+    def __init__(self, model, config, utils):
         self.device = config['device']
         if self.device == 'cuda':
             self.model = model.cuda()
