@@ -147,6 +147,9 @@ class Engine:
         all_preds = []
         all_labels = []
         for x, y in self.utils.test_loader:
+            if self.device == 'cuda':
+                x = x.cuda()
+                y = y.cuda()
             outputs = self.model(x)
             preds = self.sigmoid(outputs.detach()) > 0.5
             if self.device == 'cpu':
