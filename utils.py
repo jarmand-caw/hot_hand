@@ -108,6 +108,9 @@ class Utils:
 
         shots_df.reset_index(inplace=True, drop=True)
         shots_df = shots_df[self.cat_cols+self.cont_cols+self.y_col]
+        for idx in range(len(shots_df)):
+            if pd.isnull(shots_df['SHOT_CLOCK'].iat[idx]):
+                shots_df['SHOT_CLOCK'].iat[idx] = shots_df['GAME_CLOCK'].iat[idx]
         shots_df.dropna(axis='rows', how='any', inplace=True)
         for col in self.cont_cols:
             if col not in ['TIME_CHUCK', 'CRUNCH_TIME']:
