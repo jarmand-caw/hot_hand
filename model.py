@@ -43,7 +43,7 @@ class ShotModel(nn.Module):
             self.cat_layers.append(nn.ReLU())
         self.cat_forward = nn.Sequential(*self.cat_layers)
 
-        self.deep_layer_dims = config['deep_layers']
+        self.deep_layer_dims = deepcopy(config['deep_layers'])
         self.deep_layer_dims.insert(0, self.player_embedding_dim*3)
         self.deep_layers = []
         for idx in np.arange(len(self.deep_layer_dims)-1):
