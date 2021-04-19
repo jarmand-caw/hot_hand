@@ -23,7 +23,7 @@ class ShotModel(nn.Module):
         self.defender_embedding = nn.Embedding(len(utils.defender_map), self.defender_embedding_dim)
         self.player_embedding = nn.Embedding(len(utils.player_map), self.player_embedding_dim)
 
-        self.cont_layer_dims = config['cont_layers']
+        self.cont_layer_dims = deepcopy(config['cont_layers'])
         self.cont_layer_dims.insert(0, len(utils.cont_cols))
         self.cont_layers = []
         for idx in np.arange(len(self.cont_layer_dims)-1):
