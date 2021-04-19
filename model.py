@@ -33,7 +33,7 @@ class ShotModel(nn.Module):
             self.cont_layers.append(nn.ReLU())
         self.cont_forward = nn.Sequential(*self.cont_layers)
 
-        self.cat_layer_dims = config['cat_layers']
+        self.cat_layer_dims = deepcopy(config['cat_layers'])
         self.cat_layer_dims.insert(0, self.w_embedding_dim+self.period_embedding_dim+self.pts_type_embedding_dim+self.defender_embedding_dim)
         self.cat_layers = []
         for idx in np.arange(len(self.cat_layer_dims)-1):
