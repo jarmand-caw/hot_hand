@@ -107,7 +107,6 @@ class Utils:
         self.possible_cat_cols = ['W', 'PERIOD', 'PTS_TYPE', 'CLOSEST_DEFENDER_PLAYER_ID', 'player_id']
 
         shots_df.reset_index(inplace=True, drop=True)
-        shots_df = shots_df[self.cat_cols+self.cont_cols+self.y_col]
         for idx in range(len(shots_df)):
             if pd.isnull(shots_df['SHOT_CLOCK'].iat[idx]):
                 shots_df['SHOT_CLOCK'].iat[idx] = shots_df['GAME_CLOCK'].iat[idx]
